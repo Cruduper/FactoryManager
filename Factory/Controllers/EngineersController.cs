@@ -21,5 +21,11 @@ namespace Factory.Controllers
       List<Engineer> model = _db.Engineers.ToList();
       return View(model);
     }
+
+    public ActionResult Details(int id)
+    {
+      Engineer model = _db.Engineers.FirstOrDefault(m => m.EngineerId == id);
+      return View(model);
+    }
   }
 }
