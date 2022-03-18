@@ -1,5 +1,6 @@
 using Factory.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,5 +28,21 @@ namespace Factory.Controllers
       Machine model = _db.Machines.FirstOrDefault(m => m.MachineId == id);
       return View(model);
     }
+
+    public ActionResult Create()
+    {
+      ViewBag.EngineerId = new selectList(_db.Engineers, "EngineerId", "Name");
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Machine mach)
+    {
+      _db.Machines.Add(mach);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+
+    
   }
 }
