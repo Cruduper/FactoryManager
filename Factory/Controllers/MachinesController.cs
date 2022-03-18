@@ -25,24 +25,34 @@ namespace Factory.Controllers
 
     public ActionResult Details(int id)
     {
-      Machine model = _db.Machines.FirstOrDefault(m => m.MachineId == id);
+      Machine model = _db.Machines
+                        .Include(mach => mach.JoinEntities)
+                        .ThenInclude(join => join.Engineer)
+                        .FirstOrDefault(m => m.MachineId == id);
       return View(model);
     }
 
     public ActionResult Create()
     {
-      ViewBag.EngineerId = new selectList(_db.Engineers, "EngineerId", "Name");
+      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Machine mach)
+    public ActionResult Create(Machine mach, int EngineerId)
     {
       _db.Machines.Add(mach);
       _db.SaveChanges();
+
+      if (EngineerId != 0)
+      {
+        _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = EngineerId, MachineId = mach.MachineId });
+        _db.SaveChanges();
+      }
+
       return RedirectToAction("Index");
     }
 
-    
+
   }
 }
