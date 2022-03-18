@@ -24,7 +24,10 @@ namespace Factory.Controllers
 
     public ActionResult Details(int id)
     {
-      Engineer model = _db.Engineers.FirstOrDefault(m => m.EngineerId == id);
+      Engineer model = _db.Engineers
+                        .Include(eng => eng.JoinEntities)
+                        .ThenInclude(join => join.Machine)
+                        .FirstOrDefault(m => m.EngineerId == id);
       return View(model);
     }
   }

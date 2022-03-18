@@ -1,6 +1,7 @@
 @{
   Layout = "_Layout";
 }
+@using Factory.Models
 
 <h1>Details for Engineer named: @Model.Name</h1>
 
@@ -8,4 +9,12 @@
   <li>Employee ID: @Model.EngineerId</li>
   <li>Engineer Name: @Model.Name</li>
   <li>Years In Service: @Model.YearsExperience</li>
+</ul>
+
+<h5>Machines Assigned to @Model.Name</h5>
+<ul>
+  @foreach (EngineerMachine engM in @Model.JoinEntities)
+  {
+    <li>@Html.ActionLink(engM.Machine.Name, "Details", "Machines", new {id = engM.Machine.MachineId})</li>
+  }
 </ul>
