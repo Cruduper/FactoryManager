@@ -7,12 +7,12 @@
 
 
 
-<h1>Dr. SillyStringz Factory Manager!</h1>
+<h1 class="mb-5">Dr. SillyStringz Factory Manager!</h1>
 
 <h3>Click list titles to go to page with more details:</h3>
 
 <div>
-  <h3>@Html.ActionLink("Engineers List", "Index", "Engineers");</h3>
+  <h3>@Html.ActionLink("Engineers List", "Index", "Engineers")</h3>
   <ul>
     @foreach (Engineer eng in @ViewBag.Engineers)
     {
@@ -22,11 +22,11 @@
 </div>
 
 <div>
-  <h3>@Html.ActionLink("Machines List", "Index", "Machines");</h3>
+  <h3>@Html.ActionLink("Machines List", "Index", "Machines")</h3>
   <ul>
     @foreach (Machine mach in @ViewBag.Machines)
     {
-      <li>@Html.ActionLink(mach.Name, "Details", "Engineers", new {id = mach.MachineId})</li>
+      <li>@Html.ActionLink(mach.Name, "Details", "Machines", new {id = mach.MachineId})</li>
     }
   </ul>
 </div>

@@ -1,3 +1,15 @@
 @{
   Layout = "_Layout";
 }
+
+@using Factory.Models;
+
+<div>
+  <h1>Your Machines!</h1>
+  <ul>
+    @foreach (Machine mach in Model)
+    {
+      <li>@Html.ActionLink(mach.Name, "Details", "Machines", new {id = mach.MachineId})</li>
+    }
+  </ul>
+</div>
