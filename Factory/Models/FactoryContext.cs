@@ -4,11 +4,11 @@ namespace Factory.Models
 {
   public class FactoryContext : DbContext
   {
-    public DbSet<Course> Engineers { get; set; }
-    public DbSet<Student> Machines { get; set; }
-    public DbSet<Department> EngineerMachines { get; set; }
+    public DbSet<Engineer> Engineers { get; set; }
+    public DbSet<Machine> Machines { get; set; }
+    public DbSet<EngineerMachine> EngineerMachines { get; set; }
 
-    public RegistrarContext(DbContextOptions options) : base(options) { }
+    public FactoryContext(DbContextOptions options) : base(options) { }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

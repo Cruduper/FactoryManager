@@ -1,12 +1,16 @@
+using Factory.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+
 
 namespace Factory.Controllers
 {
-
-  private readonly ToDoListContext _db;
   public class HomeController : Controller
   {
+    private readonly FactoryContext _db;
 
     public HomeController( FactoryContext db)
     {
@@ -16,10 +20,10 @@ namespace Factory.Controllers
     [HttpGet("/")]
     public ActionResult Index()
     {
-      _db.Machines.ToList();
-      _db.Engineers.ToList();
-      return View();
+      ViewBag.Machines = _db.Machines.ToList();
+      ViewBag.Engineers = _db.Engineers.ToList();
+      Console.WriteLine("Number of Machines: " + _db.Machines.ToList().Count() );
+      return View(_db.Machines.ToList());
     }
-
   }
 }

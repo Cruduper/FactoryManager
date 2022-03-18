@@ -1,3 +1,34 @@
 @{
   Layout = "_Layout";
 }
+@using Factory.Models;
+@using System.Collections.Generic;
+
+
+
+
+<h1>Dr. SillyStringz Factory Manager!</h1>
+
+<h3>Click list titles to go to page with more details:</h3>
+
+<div>
+  <h3>@Html.ActionLink("Engineers List", "Index", "Engineers");</h3>
+  <div>@ViewBag.Engineers</div>
+  <ul>
+    @foreach (Engineer eng in @ViewBag.Engineers)
+    {
+      <li>@Html.ActionLink(eng.Name, "Details", "Engineers", new {id = eng.EngineerId})</li>
+    }
+  </ul>
+</div>
+
+<div>
+  <h3>@Html.ActionLink("Machines List", "Index", "Machines");</h3>
+  <div>@Model.Count</div>
+  <ul>
+    @foreach (Machine mach in Model)
+    {
+      <li>@Html.ActionLink(mach.Name, "Details", "Engineers", new {id = mach.MachineId})</li>
+    }
+  </ul>
+</div>
