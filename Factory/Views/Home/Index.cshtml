@@ -13,7 +13,6 @@
 
 <div>
   <h3>@Html.ActionLink("Engineers List", "Index", "Engineers");</h3>
-  <div>@ViewBag.Engineers</div>
   <ul>
     @foreach (Engineer eng in @ViewBag.Engineers)
     {
@@ -24,9 +23,8 @@
 
 <div>
   <h3>@Html.ActionLink("Machines List", "Index", "Machines");</h3>
-  <div>@Model.Count</div>
   <ul>
-    @foreach (Machine mach in Model)
+    @foreach (Machine mach in @ViewBag.Machines)
     {
       <li>@Html.ActionLink(mach.Name, "Details", "Engineers", new {id = mach.MachineId})</li>
     }

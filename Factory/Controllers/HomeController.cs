@@ -22,8 +22,7 @@ namespace Factory.Controllers
     {
       ViewBag.Machines = _db.Machines.ToList();
       ViewBag.Engineers = _db.Engineers.ToList();
-      Console.WriteLine("Number of Machines: " + _db.Machines.ToList().Count() );
-      return View(_db.Machines.ToList());
+      return View();
     }
   }
 }
