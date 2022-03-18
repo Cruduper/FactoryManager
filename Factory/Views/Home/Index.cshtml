@@ -4,15 +4,13 @@
 @using Factory.Models;
 @using System.Collections.Generic;
 
-
-
-
 <h1 class="mb-5">Dr. SillyStringz Factory Manager!</h1>
 
 <h3>Click list titles to go to page with more details:</h3>
 
 <div>
-  <h3>@Html.ActionLink("Engineers List", "Index", "Engineers")</h3>
+  <h3 class="inline-block">@Html.ActionLink("Engineers List", "Index", "Engineers")</h3>
+  <div class="inline-block">(click to add more Engineers)</div>
   <ul>
     @foreach (Engineer eng in @ViewBag.Engineers)
     {
@@ -22,7 +20,8 @@
 </div>
 
 <div>
-  <h3>@Html.ActionLink("Machines List", "Index", "Machines")</h3>
+  <h3 class="inline-block">@Html.ActionLink("Machines List", "Index", "Machines")</h3>
+  <div class="inline-block">(click to add more Machines)</div>
   <ul>
     @foreach (Machine mach in @ViewBag.Machines)
     {
