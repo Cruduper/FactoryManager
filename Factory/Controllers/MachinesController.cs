@@ -21,5 +21,11 @@ namespace Factory.Controllers
       List<Machine> model = _db.Machines.ToList();
       return View(model);
     }
+
+    public ActionResult Details(int id)
+    {
+      Machine model = _db.Machines.FirstOrDefault(m => m.MachineId == id);
+      return View(model);
+    }
   }
 }
