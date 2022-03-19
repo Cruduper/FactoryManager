@@ -18,3 +18,6 @@
     <li>@Html.ActionLink(engM.Machine.Name, "Details", "Machines", new {id = engM.Machine.MachineId})</li>
   }
 </ul>
+
+<div>@Html.ActionLink("Assign machine to this engineer", "AddMachine", new {id = @Model.EngineerId})</div>
+<div>@Html.ActionLink("Back to engineers list", "Index")</div>
