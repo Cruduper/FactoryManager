@@ -20,4 +20,5 @@
 </ul>
 
 <div>@Html.ActionLink("Assign an engineer to this machine", "AddEngineer", new {id = @Model.MachineId})</div>
+<div>@Html.ActionLink("Remove an engineer from this machine", "RemoveEngineer", new {id = @Model.MachineId})</div>
 <div>@Html.ActionLink("Back to machines list", "Index", "Machines")</div>
