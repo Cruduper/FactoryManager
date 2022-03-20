@@ -15,6 +15,6 @@
   @Html.TextBoxFor(model => model.YearsInService, new { @type = "number" })
 
   @Html.Label("Assign an machine to this engineer:")
-  @Html.DropDownList("MachineId")
+  @Html.DropDownList("MachineId", ViewBag.MachineId, "", new {})
   <input type="submit" value="Add new machine" />
 }
