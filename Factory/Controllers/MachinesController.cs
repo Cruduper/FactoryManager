@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
-// using System;
+using System;
 
 namespace Factory.Controllers
 {
@@ -71,6 +71,38 @@ namespace Factory.Controllers
           _db.SaveChanges();
         }
       }
+      return RedirectToAction("Details", new {id = mach.MachineId});
+    }
+
+    public ActionResult RemoveEngineer(int id)
+    {
+      Machine thisMach = _db.Machines.FirstOrDefault(m => m.MachineId == id);
+
+      var assignedEngineers = _db.EngineerMachines
+                                .Where(j => j.MachineId == id)
+                                .Select(e => e.Engineer)
+                                .ToList();
+                                
+      ViewBag.EngineerId = new SelectList(assignedEngineers, "EngineerId", "Name");
+      return View(thisMach); 
+    }
+
+    [HttpPost]
+    public ActionResult RemoveEngineer(Machine mach, int EngineerId)
+    {
+      if (EngineerId != 0)
+      {
+        EngineerMachine thisEngM = _db.EngineerMachines.FirstOrDefault(m => m.MachineId == mach.MachineId && m.EngineerId == EngineerId);
+        
+
+        if (thisEngM != null)
+        {
+          Console.WriteLine("we in here");
+          _db.EngineerMachines.Remove(thisEngM);
+          _db.SaveChanges();
+        }
+      }
+      
       return RedirectToAction("Details", new {id = mach.MachineId});
     }
 
