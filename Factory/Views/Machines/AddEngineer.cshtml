@@ -8,13 +8,14 @@
 
 <h4>Assign a machine to @Html.DisplayFor(model => model.Name)</h4>
 
-
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(mach => mach.MachineId);
+  @Html.HiddenFor(model => model.MachineId)
 
-  @Html.Label("Select Engineer");
-  @Html.DropDownList("EngineerId");
+  @Html.Label("Select engineer")
+  @Html.DropDownList("EngineerId", ViewBag.EngineerId, "", new {})
 
-  <input type="submit" value="save">
+  <input type="submit" value="Save"/>
 }
+
+<p>@Html.ActionLink("Back to machines list", "Details")</p>
