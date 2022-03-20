@@ -65,11 +65,14 @@ namespace Factory.Controllers
     {
       if (MachineId != 0)
       {
-        _db.EngineerMachines.Add( new EngineerMachine(){EngineerId = eng.EngineerId, MachineId = MachineId} );
-        _db.SaveChanges();
+        if (_db.EngineerMachines.Where(engM => engM.EngineerId == eng.EngineerId && engM.MachineId == MachineId).ToList().Count() == 0)
+        {
+          _db.EngineerMachines.Add( new EngineerMachine(){EngineerId = eng.EngineerId, MachineId = MachineId} );
+          _db.SaveChanges();
+        }
       }
 
-      return RedirectToAction("Index");
+      return RedirectToAction("Details", new {id = eng.EngineerId});
     }
   }
 }
