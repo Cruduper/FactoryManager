@@ -82,7 +82,7 @@ namespace Factory.Controllers
                                 .Where(j => j.MachineId == id)
                                 .Select(e => e.Engineer)
                                 .ToList();
-                                
+
       ViewBag.EngineerId = new SelectList(assignedEngineers, "EngineerId", "Name");
       return View(thisMach); 
     }
@@ -97,7 +97,6 @@ namespace Factory.Controllers
 
         if (thisEngM != null)
         {
-          Console.WriteLine("we in here");
           _db.EngineerMachines.Remove(thisEngM);
           _db.SaveChanges();
         }
