@@ -74,5 +74,32 @@ namespace Factory.Controllers
 
       return RedirectToAction("Details", new {id = eng.EngineerId});
     }
+
+    public ActionResult RemoveMachine(int id)
+    {
+      Engineer thisEng = _db.Engineers.FirstOrDefault(m => m.EngineerId == id);
+
+      var assignedMachines = _db.EngineerMachines
+                              .Where(e => e.EngineerId == id)
+                              .Select(m => m.Machine).ToList();
+      ViewBag.MachineId = new SelectList(assignedMachines, "MachineId", "Name");
+      return View(thisEng);
+    }
+
+    [HttpPost]
+    public ActionResult RemoveMachine(Engineer eng, int MachineId)
+    {
+      if(MachineId != 0)
+      {
+        EngineerMachine thisEngM = _db.EngineerMachines.FirstOrDefault(m => m.MachineId == MachineId && m.EngineerId == eng.EngineerId);
+
+        if (thisEngM != null)
+        {
+          _db.EngineerMachines.Remove(thisEngM);
+          _db.SaveChanges();
+        }
+      }
+      return RedirectToAction("Details", new {id = eng.EngineerId});
+    }
   }
 }
