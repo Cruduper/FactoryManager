@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Factory.Models.Engineer
+
+@using (Html.BeginForm())
+{
+
+  @Html.HiddenFor(mach => mach.EngineerId)
+  @Html.Label("Machine to remove")
+  @Html.DropDownList("MachineId")
+
+  <input type="submit" value="save change"/>
+}
+
+<p>@Html.ActionLink("Back to engineer details", "Details", new {id = @Model.EngineerId})</p>
