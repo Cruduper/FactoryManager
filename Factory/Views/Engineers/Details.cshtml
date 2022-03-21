@@ -13,11 +13,19 @@
 
 <h5>Machines Assigned to @Model.Name</h5>
 <ul>
-  @foreach (EngineerMachine engM in @Model.JoinEntities)
+  @if (@Model.JoinEntities.Count == 0)
   {
-    <li>@Html.ActionLink(engM.Machine.Name, "Details", "Machines", new {id = engM.Machine.MachineId})</li>
+    <p>No machines assigned.</p>
+  }
+  else
+  {
+    @foreach (EngineerMachine engM in @Model.JoinEntities)
+    {
+      <li>@Html.ActionLink(engM.Machine.Name, "Details", "Machines", new {id = engM.Machine.MachineId})</li>
+    }
   }
 </ul>
 
-<div>@Html.ActionLink("Assign machine to this engineer", "AddMachine", new {id = @Model.EngineerId})</div>
+<div>@Html.ActionLink("Assign machine to " + $"{@Model.Name}", "AddMachine", new {id = @Model.EngineerId})</div>
+<div>@Html.ActionLink("Remove a machine from " + $"{@Model.Name}", "RemoveMachine", new {id = @Model.EngineerId})</div>
 <div>@Html.ActionLink("Back to engineers list", "Index")</div>
