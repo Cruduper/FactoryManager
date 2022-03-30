@@ -9,9 +9,15 @@
   <li>Employee ID: @Model.EngineerId</li>
   <li>Engineer Name: @Model.Name</li>
   <li>Years In Service: @Model.YearsExperience</li>
+  <li>
+    @Html.ActionLink("EDIT", "Edit", "Engineers", new {id = @Model.EngineerId}, new { @class = "btn btn-dark btn-sm my-1", @role="button" })
+  </li>
+  <li>
+    @Html.ActionLink("DELETE", "Delete", "Engineers", new {id = @Model.EngineerId}, new { @class = "btn btn-dark btn-sm mb-1", @role="button" })
+  </li>
 </ul>
 
-<h5>Machines Assigned to @Model.Name</h5>
+<h5 class="mt-4">Machines Assigned to @Model.Name</h5>
 <ul>
   @if (@Model.JoinEntities.Count == 0)
   {
