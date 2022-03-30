@@ -53,6 +53,25 @@ namespace Factory.Controllers
       return RedirectToAction("Index");
     }
 
+    public ActionResult Edit(int id)
+    {
+      Machine thisMach = _db.Machines.FirstOrDefault(m => m.MachineId == id);
+
+      return View(thisMach);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Engineer mach)
+    {
+      if (mach != null)
+      {
+       _db.Entry(mach).State = EntityState.Modified;
+       _db.SaveChanges();
+      }
+
+      return RedirectToAction("Details", new {id = mach.MachineId});
+    }
+
     public ActionResult AddEngineer(int id)
     {
       Machine thisMach = _db.Machines.FirstOrDefault(mach => mach.MachineId == id);
