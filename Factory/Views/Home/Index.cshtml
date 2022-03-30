@@ -2,11 +2,8 @@
   Layout = "_Layout";
 }
 @using Factory.Models;
-@using System.Collections.Generic;
 
 <h1 class="mb-5">Dr. SillyStringz Factory Manager!</h1>
-
-<h3>Click list titles to go to page with more details:</h3>
 
 <div>
   <h3 class="inline-block">Engineers List</h3>
@@ -14,7 +11,12 @@
   <ul>
     @foreach (Engineer eng in @ViewBag.Engineers)
     {
-      <li>@Html.ActionLink(eng.Name, "Details", "Engineers", new {id = eng.EngineerId})</li>
+      <li>
+        @Html.ActionLink(eng.Name, "Details", "Engineers", new {id = eng.EngineerId}, new { @class="inline"})
+
+        @Html.ActionLink("EDIT", "Edit", "Engineers", new {id = eng.EngineerId}, new { @class = "btn btn-dark btn-sm m-1", @role="button" })  
+        @Html.ActionLink("DELETE", "Delete", "Engineers", new {id = eng.EngineerId}, new { @class = "btn btn-dark btn-sm my-2", @role="button" })  
+      </li>
     }
   </ul>
 </div>
@@ -25,7 +27,11 @@
   <ul>
     @foreach (Machine mach in @ViewBag.Machines)
     {
-      <li>@Html.ActionLink(mach.Name, "Details", "Machines", new {id = mach.MachineId})</li>
+      <li>
+        @Html.ActionLink(mach.Name, "Details", "Machines", new {id = mach.MachineId})
+        @Html.ActionLink("EDIT", "Edit", "Machines", new {id = mach.MachineId}, new { @class = "btn btn-dark btn-sm m-1", @role="button" })  
+        @Html.ActionLink("DELETE", "Delete", "Machines", new {id = mach.MachineId}, new { @class = "btn btn-dark btn-sm my-2", @role="button" })  
+      </li>
     }
   </ul>
 </div>
