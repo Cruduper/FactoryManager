@@ -61,7 +61,7 @@ namespace Factory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Engineer mach)
+    public ActionResult Edit(Machine mach)
     {
       if (mach != null)
       {
@@ -70,6 +70,25 @@ namespace Factory.Controllers
       }
 
       return RedirectToAction("Details", new {id = mach.MachineId});
+    }
+
+    public ActionResult Delete(int id)
+    {
+      Machine thisMach = _db.Machines.FirstOrDefault(m => m.MachineId == id);
+
+      return View(thisMach);
+    }
+
+    [HttpPost]
+    public ActionResult Delete(Machine mach)
+    {
+      if (mach != null)
+      {
+        _db.Machines.Remove(mach);
+        _db.SaveChanges();
+      }
+
+      return RedirectToAction("Index");
     }
 
     public ActionResult AddEngineer(int id)
